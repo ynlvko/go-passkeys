@@ -11,14 +11,14 @@ var sessionDataStore = map[string]*webauthn.SessionData{}
 
 // WebAuthn configuration
 var webAuthn, _ = webauthn.New(&webauthn.Config{
-	RPID:          "localhost",
+	RPID:          "go-passkeys.onrender.com",
 	RPDisplayName: "Demo App",
-	RPOrigins:     []string{"http://localhost:8080"},
+	RPOrigins:     []string{"https://go-passkeys.onrender.com"},
 })
 
 func main() {
 	http.HandleFunc("/begin-registration", beginRegistration)
 	http.HandleFunc("/finish-registration", finishRegistration)
 
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe("0.0.0.0", nil)
 }
