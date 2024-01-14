@@ -2,12 +2,14 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/go-webauthn/webauthn/webauthn"
+	"log"
 	"net/http"
 )
 
 func beginRegistration(w http.ResponseWriter, r *http.Request) {
+	log.Println("Begin registration requested")
+
 	user := &User{
 		ID:          []byte("user-id"),
 		Name:        "username",
@@ -17,14 +19,19 @@ func beginRegistration(w http.ResponseWriter, r *http.Request) {
 
 	options, sessionData, err := webAuthn.BeginRegistration(user)
 	if err != nil {
-		fmt.Println(err)
+		log.Printf("An error occurred: %v\n", err)
 	}
 	sessionDataStore[user.Name] = sessionData
+	log.Printf("sessionData=%+v\n", sessionData)
 
 	json.NewEncoder(w).Encode(options)
+	log.Println("Begin registration processed")
+
 }
 
 func finishRegistration(w http.ResponseWriter, r *http.Request) {
+	log.Println("Finish registration requested")
+
 	user := &User{
 		ID:          []byte("user-id"),
 		Name:        "username",
@@ -36,17 +43,18 @@ func finishRegistration(w http.ResponseWriter, r *http.Request) {
 	// Parse registration response
 	session, ok := sessionDataStore[user.Name]
 	if !ok {
-		fmt.Println("Session data not found")
+		log.Println("Session data not found")
 		return
 	}
 
 	credential, err := webAuthn.FinishRegistration(user, *session, r)
 	if err != nil {
-		fmt.Println(err)
+		log.Printf("An error occurred: %v\n", err)
 	}
 
 	user.Credentials = append(user.Credentials, *credential)
 	users[user.Name] = user
 
 	w.Write([]byte("Registration successful"))
+	log.Println("Finish registration processed")
 }
