@@ -22,6 +22,11 @@ func main() {
 	http.Handle("/begin-registration", corsMiddleware(http.HandlerFunc(beginRegistration)))
 	http.Handle("/finish-registration", corsMiddleware(http.HandlerFunc(finishRegistration)))
 
+	http.HandleFunc("/.well-known/apple-app-site-association", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		http.ServeFile(w, r, "static/apple-app-site-association")
+	})
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"

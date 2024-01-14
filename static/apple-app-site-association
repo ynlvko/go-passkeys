@@ -1,0 +1,18 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "WHUWGQB5PP.com.fastex.appdev",
+        "paths": [
+          "*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "WHUWGQB5PP.com.fastex.appdev"
+    ]
+  }
+}
