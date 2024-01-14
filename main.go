@@ -19,8 +19,8 @@ var webAuthn, _ = webauthn.New(&webauthn.Config{
 })
 
 func main() {
-	http.HandleFunc("/begin-registration", beginRegistration)
-	http.HandleFunc("/finish-registration", finishRegistration)
+	http.Handle("/begin-registration", corsMiddleware(http.HandlerFunc(beginRegistration)))
+	http.Handle("/finish-registration", corsMiddleware(http.HandlerFunc(finishRegistration)))
 
 	port := os.Getenv("PORT")
 	if port == "" {

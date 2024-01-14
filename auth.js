@@ -24,7 +24,7 @@ function arrayBufferToBase64String(arrayBuffer) {
 
 // Begin registration
 async function beginRegistration() {
-    const response = await fetch('http://localhost:8080/begin-registration');
+    const response = await fetch('https://go-passkeys.onrender.com/begin-registration');
     const data = await response.json();
 
     // Convert challenge and user ID from Base64 to ArrayBuffer
@@ -51,7 +51,7 @@ async function finishRegistration(creds) {
         },
     };
 
-    await fetch('http://localhost:8080/finish-registration', {
+    await fetch('https://go-passkeys.onrender.com/finish-registration', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
