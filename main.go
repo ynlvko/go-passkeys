@@ -16,11 +16,16 @@ var sessionDataStore = map[string]*webauthn.SessionData{}
 var webAuthn *webauthn.WebAuthn
 
 func main() {
-	err := godotenv.Load() // This will load your .env file
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	appEnv := os.Getenv("APP_ENV")
+	if appEnv == "" {
+		appEnv = "development"
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
 	}
 
+	var err error
 	webAuthn, err = webauthn.New(&webauthn.Config{
 		RPID:          os.Getenv("RPID"),
 		RPDisplayName: os.Getenv("RPDisplayName"),
