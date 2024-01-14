@@ -48,6 +48,7 @@ func finishRegistration(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Printf("session: %+v", session)
+	log.Printf("request: %+v", *r)
 	credential, err := webAuthn.FinishRegistration(user, *session, r)
 	if err != nil {
 		log.Printf("An error occurred: %v\n", err)
