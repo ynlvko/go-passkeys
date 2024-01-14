@@ -2,7 +2,9 @@ package main
 
 import (
 	"github.com/go-webauthn/webauthn/webauthn"
+	"log"
 	"net/http"
+	"os"
 )
 
 // In-memory user storage
@@ -20,5 +22,12 @@ func main() {
 	http.HandleFunc("/begin-registration", beginRegistration)
 	http.HandleFunc("/finish-registration", finishRegistration)
 
-	http.ListenAndServe("0.0.0.0", nil)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	err := http.ListenAndServe(":"+port, nil)
+	if err != nil {
+		log.Panicf("error: %s", err)
+	}
 }
