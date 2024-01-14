@@ -9,6 +9,7 @@ import (
 
 func beginRegistration(w http.ResponseWriter, r *http.Request) {
 	log.Println("Begin registration requested")
+	logRequest(r)
 
 	user := &User{
 		ID:          []byte("user-id"),
@@ -31,6 +32,7 @@ func beginRegistration(w http.ResponseWriter, r *http.Request) {
 
 func finishRegistration(w http.ResponseWriter, r *http.Request) {
 	log.Println("Finish registration requested")
+	logRequest(r)
 
 	user := &User{
 		ID:          []byte("user-id"),
@@ -48,7 +50,6 @@ func finishRegistration(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Printf("session: %+v", session)
-	log.Printf("request: %+v", *r)
 	credential, err := webAuthn.FinishRegistration(user, *session, r)
 	if err != nil {
 		log.Printf("An error occurred: %v\n", err)
