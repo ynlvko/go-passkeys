@@ -42,6 +42,10 @@ func main() {
 		w.Header().Set("Content-Type", "application/json")
 		http.ServeFile(w, r, "static/apple-app-site-association")
 	})
+	http.HandleFunc("/.well-known/assetlinks.json", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		http.ServeFile(w, r, "static/assetlinks")
+	})
 
 	port := os.Getenv("PORT")
 	if port == "" {

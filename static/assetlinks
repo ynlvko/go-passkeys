@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission\/common.handle_all_urls",
+      "delegate_permission\/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.fastex.app",
+      "sha256_cert_fingerprints": [
+        "E7:B3:6C:B4:5D:05:71:A8:B7:7B:18:E2:5B:53:E7:C3:04:F7:BC:82:DB:09:12:8D:B2:AC:0B:08:02:51:4D:84"
+      ]
+    }
+  }
+]
