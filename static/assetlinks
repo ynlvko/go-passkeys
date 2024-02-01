@@ -1,14 +1,14 @@
 [
   {
     "relation": [
-      "delegate_permission\/common.handle_all_urls",
-      "delegate_permission\/common.get_login_creds"
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
     ],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.fastex.app",
+      "package_name": "com.fastex.appdev",
       "sha256_cert_fingerprints": [
-        "E7:B3:6C:B4:5D:05:71:A8:B7:7B:18:E2:5B:53:E7:C3:04:F7:BC:82:DB:09:12:8D:B2:AC:0B:08:02:51:4D:84"
+        "AF:6B:2E:60:7E:96:F8:C3:70:DA:38:9D:EB:98:1E:36:B9:85:F9:E7:F4:05:C3:73:66:36:80:C3:7F:3D:0E:7F"
       ]
     }
   }
