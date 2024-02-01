@@ -29,7 +29,7 @@ func main() {
 	webAuthn, err = webauthn.New(&webauthn.Config{
 		RPID:          os.Getenv("RPID"),
 		RPDisplayName: os.Getenv("RPDisplayName"),
-		RPOrigins:     []string{os.Getenv("RPOrigin")},
+		RPOrigins:     []string{os.Getenv("RPOrigin"), "android:apk-key-hash:r2suYH6W-MNw2jid65geNrmF-ef0BcNzZjaAw389Dn8"},
 	})
 	if err != nil {
 		log.Fatal(err)
