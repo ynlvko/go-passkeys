@@ -9,7 +9,15 @@ import (
 )
 
 // In-memory user storage
-var users = map[string]*User{}
+var users = map[string]*User{
+	"username": {
+		ID:          []byte("user-id"),
+		Name:        "username",
+		DisplayName: "User Name",
+		Icon:        "",
+		Credentials: []webauthn.Credential{},
+	},
+}
 var sessionDataStore = map[string]*webauthn.SessionData{}
 
 // WebAuthn configuration
@@ -37,6 +45,7 @@ func main() {
 
 	http.Handle("/begin-registration", corsMiddleware(http.HandlerFunc(beginRegistration)))
 	http.Handle("/finish-registration", corsMiddleware(http.HandlerFunc(finishRegistration)))
+	http.Handle("/begin-login", corsMiddleware(http.HandlerFunc(beginLogin)))
 
 	http.HandleFunc("/.well-known/apple-app-site-association", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")

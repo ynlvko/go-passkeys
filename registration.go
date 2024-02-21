@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/go-webauthn/webauthn/webauthn"
 	"log"
 	"net/http"
 )
@@ -11,12 +10,7 @@ func beginRegistration(w http.ResponseWriter, r *http.Request) {
 	log.Println("Begin registration requested")
 	logRequest(r)
 
-	user := &User{
-		ID:          []byte("user-id"),
-		Name:        "username",
-		DisplayName: "User Name",
-		Icon:        "",
-	}
+	user := users["username"]
 
 	options, sessionData, err := webAuthn.BeginRegistration(user)
 	if err != nil {
@@ -34,13 +28,7 @@ func finishRegistration(w http.ResponseWriter, r *http.Request) {
 	log.Println("Finish registration requested")
 	logRequest(r)
 
-	user := &User{
-		ID:          []byte("user-id"),
-		Name:        "username",
-		DisplayName: "User Name",
-		Icon:        "",
-		Credentials: []webauthn.Credential{},
-	}
+	user := users["username"]
 
 	// Parse registration response
 	session, ok := sessionDataStore[user.Name]
